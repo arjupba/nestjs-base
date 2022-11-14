@@ -49,7 +49,13 @@ export class VegetablesService {
     }
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} vegetable`;
+  async remove(id: string) {
+    const vegetable = await this.vegetableModel.findOne({ _id: id }).exec();
+
+    if (vegetable) {
+      await vegetable.remove();
+
+      return { ok: true, message: `Vegetable deleted ${id}` };
+    }
   }
 }
