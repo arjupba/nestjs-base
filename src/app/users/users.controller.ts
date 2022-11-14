@@ -8,7 +8,7 @@ import {
   Delete,
   UseInterceptors,
   UseGuards,
-  Request,
+  Query,
 } from '@nestjs/common';
 
 import { ApiTags } from '@nestjs/swagger';
@@ -21,7 +21,7 @@ import { RoleEnum } from './entities/user.entity';
 import RoleGuard from '../auth/guards/role.gurad';
 import { NotFoundInterceptor } from '../../lib/notFoundInterceptor';
 import { QueryMen } from '../../lib/queryMenDecorator';
-
+import { PaginationQueryDto } from '../../lib/queryMenDto';
 @ApiTags('users')
 @UseGuards(JwtAuthGuard)
 @Controller('users')
@@ -36,7 +36,10 @@ export class UsersController {
 
   @UseGuards(RoleGuard(RoleEnum.Admin))
   @Get()
-  findAll(@QueryMen() { query, select, cursor }) {
+  findAll(
+    @QueryMen() { query, select, cursor },
+    @Query() _: PaginationQueryDto,
+  ) {
     return this.usersService.findAll(query, select, cursor);
   }
 

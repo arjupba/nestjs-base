@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   UseInterceptors,
+  Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { VegetablesService } from './vegetables.service';
@@ -16,7 +17,7 @@ import { UpdateVegetableDto } from './dto/update-vegetable.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { NotFoundInterceptor } from '../../lib/notFoundInterceptor';
 import { QueryMen } from '../../lib/queryMenDecorator';
-
+import { PaginationQueryDto } from '../../lib/queryMenDto';
 @ApiTags('vegetables')
 @UseGuards(JwtAuthGuard)
 @Controller('vegetables')
@@ -29,7 +30,10 @@ export class VegetablesController {
   }
 
   @Get()
-  findAll(@QueryMen() { query, select, cursor }) {
+  findAll(
+    @QueryMen() { query, select, cursor },
+    @Query() _: PaginationQueryDto,
+  ) {
     return this.vegetablesService.findAll(query, select, cursor);
   }
 
