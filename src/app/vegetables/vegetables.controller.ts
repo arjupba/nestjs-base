@@ -18,6 +18,8 @@ import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { NotFoundInterceptor } from '../../lib/notFoundInterceptor';
 import { QueryMen } from '../../lib/queryMenDecorator';
 import { PaginationQueryDto } from '../../lib/queryMenDto';
+import { ParamIdDto } from '../../lib/paramIdDto';
+
 @ApiTags('vegetables')
 @UseGuards(JwtAuthGuard)
 @Controller('vegetables')
@@ -39,22 +41,22 @@ export class VegetablesController {
 
   @Get(':id')
   @UseInterceptors(new NotFoundInterceptor('No vegetable found for given Id'))
-  findOne(@Param('id') id: string) {
-    return this.vegetablesService.findOne(id);
+  findOne(@Param() params: ParamIdDto) {
+    return this.vegetablesService.findOne(params.id);
   }
 
   @Patch(':id')
   @UseInterceptors(new NotFoundInterceptor('No vegetable found for given Id'))
   update(
-    @Param('id') id: string,
+    @Param() params: ParamIdDto,
     @Body() updateVegetableDto: UpdateVegetableDto,
   ) {
-    return this.vegetablesService.update(id, updateVegetableDto);
+    return this.vegetablesService.update(params.id, updateVegetableDto);
   }
 
   @Delete(':id')
   @UseInterceptors(new NotFoundInterceptor('No vegetable found for given Id'))
-  remove(@Param('id') id: string) {
-    return this.vegetablesService.remove(id);
+  remove(@Param() params: ParamIdDto) {
+    return this.vegetablesService.remove(params.id);
   }
 }

@@ -17,10 +17,3 @@ export class CreateVegetableDto {
   @Min(0)
   price: string;
 }
-
-export class QueryMenDto {
-  @ApiProperty({ required: false })
-  @IsNumber()
-  @Min(0)
-  page: number;
-}
