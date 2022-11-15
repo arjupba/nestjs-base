@@ -8,8 +8,15 @@ export class QueryMenExceptionFilter implements ExceptionFilter {
 
     if (req.querymen && req.querymen.error) {
       res.status(400).json(req.querymen.error);
+    } else if (exception.response && exception.response) {
+      res
+        .status(exception.status)
+        .json(exception.response || exception.message);
     } else {
-      res.status(exception.status).json(exception.response);
+      res.status(500).json({
+        statusCode: 500,
+        message: 'Internal server error',
+      });
     }
   }
 }
