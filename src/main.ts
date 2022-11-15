@@ -3,7 +3,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ConfigService } from 'nestjs-config';
 import { AppModule } from './app.module';
-import { QueryMenExceptionFilter } from './lib/queryMenExceptionFilter';
+import { QueryMenExceptionFilter } from './lib/queryMen/queryMenInterceptor';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);

@@ -20,8 +20,8 @@ import { User } from '../../lib/userDecorator';
 import { RoleEnum } from './entities/user.entity';
 import RoleGuard from '../auth/guards/role.gurad';
 import { NotFoundInterceptor } from '../../lib/notFoundInterceptor';
-import { QueryMen } from '../../lib/queryMenDecorator';
-import { PaginationQueryDto } from '../../lib/queryMenDto';
+import { QueryMen } from '../../lib/queryMen/queryMenDecorator';
+import { PaginationQueryDto } from '../../lib/queryMen/queryMenDto';
 @ApiTags('users')
 @UseGuards(JwtAuthGuard)
 @Controller('users')

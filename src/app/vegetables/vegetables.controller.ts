@@ -16,8 +16,8 @@ import { CreateVegetableDto } from './dto/create-vegetable.dto';
 import { UpdateVegetableDto } from './dto/update-vegetable.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
 import { NotFoundInterceptor } from '../../lib/notFoundInterceptor';
-import { QueryMen } from '../../lib/queryMenDecorator';
-import { PaginationQueryDto } from '../../lib/queryMenDto';
+import { QueryMen } from '../../lib/queryMen/queryMenDecorator';
+import { PaginationQueryDto } from '../../lib/queryMen/queryMenDto';
 import { ParamIdDto } from '../../lib/paramIdDto';
 
 @ApiTags('vegetables')
